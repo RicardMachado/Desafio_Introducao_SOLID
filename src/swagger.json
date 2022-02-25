@@ -1,0 +1,135 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Challenge SOLID Documentation",
+        "description": "This is an API Users",
+        "version": "1.0.0",
+        "contact": {
+            "email": "ricardo.machado10@gmail.com"
+        }
+    },
+    "paths": {
+        "/Users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create User",
+                "description": "create a new user",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "example": "ricardo machado"
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "example": "teste@teste.com.br"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "User already exists"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "List User",
+                "description": "List all User",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "User does not have permission"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User Profile",
+                "description": "Displays the data of the user passed in the route",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/users/{id}/admin": {
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Make a user admin",
+                "description": "Administrative permission to the user",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        }
+    }
+}
